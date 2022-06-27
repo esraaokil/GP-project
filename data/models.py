@@ -8,7 +8,7 @@ from django.core.validators import RegexValidator
 # lets us explicitly set upload path and filename
 def upload_to(instance, filename):
     return 'images/{filename}'.format(filename=filename)
-    
+
 # Create your models here.
 class Profile(models.Model):
     type_choices= (
@@ -35,4 +35,6 @@ class Profile(models.Model):
         return str(self.name)
     class Meta:
         ordering=['name']   
+    
+
     
