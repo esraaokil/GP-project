@@ -1,0 +1,1 @@
+web: gunicorn covido.wsgi --log-file -
