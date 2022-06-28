@@ -12,7 +12,7 @@ def upload_to(instance, filename):
 # Create your models here.
 #from csv
 class state(models.Model):
-    id = models.IntegerField( unique=True,primary_key=True)
+    id = models.IntegerField(_("id"), unique=True,primary_key=True)
     state_arabic=models.CharField(_("governorate_name_ar"),max_length=50)  
     state_english=models.CharField(_("governorate_name_en"),max_length=50)   
 
