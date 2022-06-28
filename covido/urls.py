@@ -28,9 +28,6 @@ urlpatterns = [
     #GET POST from profile_Post
     path('profile_create/', views.profile_create),
 
-    path('profile_create/', views.profile_create),
-     #GET PUT DELETE from profile_edit
-    #path('profile_edit/<uuid:pk>', views.profile_edit),
 
     #GET POST from doctor_create
     path('doctor_create/', views.doctor_create),
