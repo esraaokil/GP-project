@@ -22,8 +22,7 @@ from data import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #GET POST from state_create
-    path('state_create/', views.state_create),
+    
 
     #GET POST from profile_Post
     path('profile_create/', views.profile_create),

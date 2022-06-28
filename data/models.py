@@ -10,14 +10,37 @@ def upload_to(instance, filename):
     return 'images/{filename}'.format(filename=filename)
 
 # Create your models here.
-#from csv
-class state(models.Model):
-    id = models.IntegerField(_("id"), unique=True,primary_key=True)
-    state_arabic=models.CharField(_("governorate_name_ar"),max_length=50)  
-    state_english=models.CharField(_("governorate_name_en"),max_length=50)   
+
 
 
 class Profile(models.Model):
+    EGYPT_CITIES = (
+        ('Cairo', 'Cairo'),
+        ('Alexandria', 'Alexandria'),
+        ('Giza', 'Giza'),
+        ('Shubra', 'Shubra El Kheima'),
+        ('Port_Said', 'Port Said'),
+        ('Suez', 'Suez'),
+        ('Mahalla', 'Mahalla (Gharbia)'),
+        ('Luxor', 'Luxor'),
+        ('Mansoura', 'Mansoura (Dakahlia)'),
+        ('Tanta', 'Tanta (Gharbia)'),
+        ('Asyut', 'Asyut'),
+        ('Ismailia', 'Ismailia'),
+        ('Faiyum', 'Faiyum'),
+        ('Zagazig', 'Zagazig (Sharqia)'),
+        ('Damietta', 'Damietta'),
+        ('Aswan', 'Aswan'),
+        ('Minya', 'Minya'),
+        ('Damanhur', 'Damanhur (Beheira)'),
+        ('Beni_Suef', 'Beni Suef'),
+        ('Hurghada', 'Hurghada (Red Sea)'),
+        ('Qena', 'Qena'),
+        ('Sohag', 'Sohag'),
+        ('Shibin', 'Shibin El Kom (Monufia)'),
+        ('Banha', 'Banha (Qalyubia)'),
+        ('Arish', 'Arish (North Sinai)'),
+    )
     type_choices= (
         ('doctor','doctor'),
         ('patient','patient')
@@ -32,7 +55,7 @@ class Profile(models.Model):
     email = models.EmailField(max_length=500, blank=True,null=True )
     password = models.CharField(max_length=200, blank=True,null=True)
     gander= models.CharField(max_length=50, blank=True,null=True, choices=six)
-    city_id = models.ForeignKey(state,related_name='state', on_delete=models.CASCADE,null=True, blank=True)
+    city = models.CharField(max_length=200, blank=True, null=True, choices=EGYPT_CITIES)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
     phone_number = models.CharField(validators=[phone_regex], max_length=17,  blank=True,null=True, unique=True) # Validators should be a list
     #created = models.DateTimeField(default=datetime(2017, 7, 28, 7, 58, 21))
