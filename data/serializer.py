@@ -1,5 +1,10 @@
 from rest_framework import serializers
-from data.models import Profile,Doctor,Patient,Review,ChestDetails,Chronic_diseases,Patient_chronic_diseases
+from data.models import Profile,Doctor,Patient,Review,ChestDetails,Chronic_diseases,Patient_chronic_diseases,state
+
+class stateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=state
+        fields=['state_arabic','state_english'] 
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -7,7 +12,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model=Profile
-        fields= '__all__'
+        fields= ['type_name','name','email','password','gander','state','phone_number','profile_image']
 
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:

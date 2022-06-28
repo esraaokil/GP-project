@@ -33,7 +33,7 @@ class Profile(models.Model):
     email = models.EmailField(max_length=500, blank=True,null=True )
     password = models.CharField(max_length=200, blank=True,null=True)
     gander= models.CharField(max_length=50, blank=True,null=True, choices=six)
-    #city = models.CharField(max_length=200, blank=True, )
+    city_id = models.ForeignKey(state,related_name='state', on_delete=models.CASCADE,null=True, blank=True)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
     phone_number = models.CharField(validators=[phone_regex], max_length=17,  blank=True,null=True, unique=True) # Validators should be a list
     #created = models.DateTimeField(default=datetime(2017, 7, 28, 7, 58, 21))
