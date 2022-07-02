@@ -1,10 +1,31 @@
 from django.shortcuts import render
-from .models import Profile,Doctor,Patient,Review,ChestDetails,Chronic_diseases,Patient_chronic_diseases
+from .models import Profile,Doctor,Patient,Review,ChestDetails,Chronic_diseases,Patient_chronic_diseases,governorates,cities
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializer import  ProfileSerializer,DoctorSerializer,PatientSerializer,ChestDetailsSerializer,ReviewSerializer,Chronic_diseasesSerializer,Patient_chronic_diseasesSerializer
+from .serializer import  ProfileSerializer,DoctorSerializer,PatientSerializer,ChestDetailsSerializer,ReviewSerializer,Chronic_diseasesSerializer,Patient_chronic_diseasesSerializer,governoratesSerializer,citiesSerializer
 from rest_framework import status, filters
 # Create your views here.
+
+#state
+@api_view(['GET'])
+def governorates_create(request):
+    # GET
+    if request.method == 'GET':
+        profile = governorates.objects.all()
+        serializer = governoratesSerializer(profile, many=True)
+        return Response(serializer.data)
+
+#city
+@api_view(['GET'])
+def cities_create(request):
+    # GET
+    if request.method == 'GET':
+        profile = cities.objects.all()
+        serializer = citiesSerializer(profile, many=True)
+        return Response(serializer.data)
+
+
+
 
 #profile 
 @api_view(['GET','POST'])

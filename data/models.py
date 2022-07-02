@@ -1,3 +1,5 @@
+from codecs import utf_16_be_decode, utf_8_decode
+from encodings import utf_8
 from django.db import models
 from PIL import Image
 import os
@@ -10,37 +12,46 @@ def upload_to(instance, filename):
     return 'images/{filename}'.format(filename=filename)
 
 # Create your models here.
+class governorates(models.Model):
+    id=models.IntegerField(unique=True, primary_key=True, editable=True)
+    governorate_name_ar=models.CharField(max_length=200,blank=True, null=True)
+    governorate_name_en=models.CharField(max_length=200,blank=True, null=True)
 
 
+class cities(models.Model):
+    id=models.IntegerField(unique=True, primary_key=True, editable=True)
+    governorate_id=models.ForeignKey(governorates,on_delete=models.CASCADE, null=True,related_name='state')
+    city_name_ar=models.CharField(max_length=200,blank=True, null=True)
+    city_name_en=models.CharField(max_length=200,blank=True, null=True)
 
 class Profile(models.Model):
-    EGYPT_CITIES = (
-        ('Cairo', 'Cairo'),
-        ('Alexandria', 'Alexandria'),
-        ('Giza', 'Giza'),
-        ('Shubra', 'Shubra El Kheima'),
-        ('Port_Said', 'Port Said'),
-        ('Suez', 'Suez'),
-        ('Mahalla', 'Mahalla (Gharbia)'),
-        ('Luxor', 'Luxor'),
-        ('Mansoura', 'Mansoura (Dakahlia)'),
-        ('Tanta', 'Tanta (Gharbia)'),
-        ('Asyut', 'Asyut'),
-        ('Ismailia', 'Ismailia'),
-        ('Faiyum', 'Faiyum'),
-        ('Zagazig', 'Zagazig (Sharqia)'),
-        ('Damietta', 'Damietta'),
-        ('Aswan', 'Aswan'),
-        ('Minya', 'Minya'),
-        ('Damanhur', 'Damanhur (Beheira)'),
-        ('Beni_Suef', 'Beni Suef'),
-        ('Hurghada', 'Hurghada (Red Sea)'),
-        ('Qena', 'Qena'),
-        ('Sohag', 'Sohag'),
-        ('Shibin', 'Shibin El Kom (Monufia)'),
-        ('Banha', 'Banha (Qalyubia)'),
-        ('Arish', 'Arish (North Sinai)'),
-    )
+    # EGYPT_CITIES = (
+    #     ('Cairo', 'Cairo'),
+    #     ('Alexandria', 'Alexandria'),
+    #     ('Giza', 'Giza'),
+    #     ('Shubra', 'Shubra El Kheima'),
+    #     ('Port_Said', 'Port Said'),
+    #     ('Suez', 'Suez'),
+    #     ('Mahalla', 'Mahalla (Gharbia)'),
+    #     ('Luxor', 'Luxor'),
+    #     ('Mansoura', 'Mansoura (Dakahlia)'),
+    #     ('Tanta', 'Tanta (Gharbia)'),
+    #     ('Asyut', 'Asyut'),
+    #     ('Ismailia', 'Ismailia'),
+    #     ('Faiyum', 'Faiyum'),
+    #     ('Zagazig', 'Zagazig (Sharqia)'),
+    #     ('Damietta', 'Damietta'),
+    #     ('Aswan', 'Aswan'),
+    #     ('Minya', 'Minya'),
+    #     ('Damanhur', 'Damanhur (Beheira)'),
+    #     ('Beni_Suef', 'Beni Suef'),
+    #     ('Hurghada', 'Hurghada (Red Sea)'),
+    #     ('Qena', 'Qena'),
+    #     ('Sohag', 'Sohag'),
+    #     ('Shibin', 'Shibin El Kom (Monufia)'),
+    #     ('Banha', 'Banha (Qalyubia)'),
+    #     ('Arish', 'Arish (North Sinai)'),
+    # )
     type_choices= (
         ('doctor','doctor'),
         ('patient','patient')
@@ -55,7 +66,8 @@ class Profile(models.Model):
     email = models.EmailField(max_length=500, blank=True,null=True )
     password = models.CharField(max_length=200, blank=True,null=True)
     gander= models.CharField(max_length=50, blank=True,null=True, choices=six)
-    city = models.CharField(max_length=200, blank=True, null=True, choices=EGYPT_CITIES)
+    #city = models.CharField(max_length=200, blank=True, null=True, choices=EGYPT_CITIES)
+    city_id=models.ForeignKey(cities,on_delete=models.CASCADE, null=True)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
     phone_number = models.CharField(validators=[phone_regex], max_length=17,  blank=True,null=True, unique=True) # Validators should be a list
     #created = models.DateTimeField(default=datetime(2017, 7, 28, 7, 58, 21))

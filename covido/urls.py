@@ -23,6 +23,11 @@ from data import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     
+    #GET  from governorates_create
+    path('governorates_create/', views.governorates_create),
+
+    #GET from cities_create
+    path('cities_create/', views.cities_create),
 
     #GET POST from profile_Post
     path('profile_create/', views.profile_create),

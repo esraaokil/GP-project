@@ -1,15 +1,23 @@
 from rest_framework import serializers
-from data.models import Profile,Doctor,Patient,Review,ChestDetails,Chronic_diseases,Patient_chronic_diseases
+from data.models import Profile,Doctor,Patient,Review,ChestDetails,Chronic_diseases,Patient_chronic_diseases,governorates,cities
 
 
+class governoratesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=governorates
+        fields=['governorate_name_ar','governorate_name_en','state']
 
+class citiesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=cities
+        fields= '__all__'
 
 class ProfileSerializer(serializers.ModelSerializer):
     profile_image= serializers.ImageField(required=False)
 
     class Meta:
         model=Profile
-        #fields= ['type_name','name','email','password','gander','city','phone_number','profile_image']
+        #fields= ['type_name','name','email','password','gander','city_id','phone_number','profile_image']
         fields= '__all__'
 
 class ReviewSerializer(serializers.ModelSerializer):
