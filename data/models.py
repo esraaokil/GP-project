@@ -18,7 +18,7 @@ class governorates(models.Model):
     governorate_name_en=models.CharField(max_length=200,blank=True, null=True)
 
 class city(models.Model):
-    governorate_id=models.ForeignKey(governorates,on_delete=models.CASCADE, null=True,related_name='state')
+    governorate_id=models.ForeignKey(governorates,on_delete=models.CASCADE, null=True)
     city_name_ar=models.CharField(max_length=200,blank=True, null=True)
     city_name_en=models.CharField(max_length=200,blank=True, null=True)
 
