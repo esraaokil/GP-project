@@ -28,7 +28,7 @@ SECRET_KEY = config('SECRET_KEY')
 #DEBUG = True
 DEBUG= config('DEBUG')
 
-ALLOWED_HOSTS =['127.0.0.1','.localhost','covido-app.herokuapp.com/']
+ALLOWED_HOSTS =['127.0.0.1','.localhost','covido-app.herokuapp.com']
 #ALLOWED_HOSTS = []
 
 
