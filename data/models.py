@@ -18,7 +18,8 @@ class governorates(models.Model):
     governorate_name_en=models.CharField(max_length=200,blank=True, null=True)
 
 
-class cities(models.Model):
+
+class citiess(models.Model):
     id=models.IntegerField(unique=True, primary_key=True, editable=True)
     governorate_id=models.ForeignKey(governorates,on_delete=models.CASCADE, null=True,related_name='state')
     city_name_ar=models.CharField(max_length=200,blank=True, null=True)
@@ -67,7 +68,7 @@ class Profile(models.Model):
     password = models.CharField(max_length=200, blank=True,null=True)
     gander= models.CharField(max_length=50, blank=True,null=True, choices=six)
     #city = models.CharField(max_length=200, blank=True, null=True, choices=EGYPT_CITIES)
-    city_id=models.ForeignKey(cities,on_delete=models.CASCADE, null=True)
+    city_id=models.ForeignKey(citiess,on_delete=models.CASCADE, null=True)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
     phone_number = models.CharField(validators=[phone_regex], max_length=17,  blank=True,null=True, unique=True) # Validators should be a list
     #created = models.DateTimeField(default=datetime(2017, 7, 28, 7, 58, 21))

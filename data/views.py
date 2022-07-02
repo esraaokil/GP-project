@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Profile,Doctor,Patient,Review,ChestDetails,Chronic_diseases,Patient_chronic_diseases,governorates,cities
+from .models import Profile,Doctor,Patient,Review,ChestDetails,Chronic_diseases,Patient_chronic_diseases,governorates,citiess
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializer import  ProfileSerializer,DoctorSerializer,PatientSerializer,ChestDetailsSerializer,ReviewSerializer,Chronic_diseasesSerializer,Patient_chronic_diseasesSerializer,governoratesSerializer,citiesSerializer
@@ -20,7 +20,7 @@ def governorates_create(request):
 def cities_create(request):
     # GET
     if request.method == 'GET':
-        profile = cities.objects.all()
+        profile = citiess.objects.all()
         serializer = citiesSerializer(profile, many=True)
         return Response(serializer.data)
 

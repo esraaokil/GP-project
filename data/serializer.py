@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from data.models import Profile,Doctor,Patient,Review,ChestDetails,Chronic_diseases,Patient_chronic_diseases,governorates,cities
+from data.models import Profile,Doctor,Patient,Review,ChestDetails,Chronic_diseases,Patient_chronic_diseases,governorates,citiess
 
 
 class governoratesSerializer(serializers.ModelSerializer):
@@ -9,7 +9,7 @@ class governoratesSerializer(serializers.ModelSerializer):
 
 class citiesSerializer(serializers.ModelSerializer):
     class Meta:
-        model=cities
+        model=citiess
         fields= '__all__'
 
 class ProfileSerializer(serializers.ModelSerializer):
