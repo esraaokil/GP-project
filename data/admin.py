@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Profile,Doctor,Patient,Review,ChestDetails,Chronic_diseases,Patient_chronic_diseases,governorates#citiess
+from .models import Profile,Doctor,Patient,Review,ChestDetails,Chronic_diseases,Patient_chronic_diseases,governorates,city
 # Register your models here.
 admin.site.register(governorates)
-#admin.site.register(citiess)
+admin.site.register(city)
 admin.site.register(Profile)
 admin.site.register(Doctor)
 admin.site.register(Patient)

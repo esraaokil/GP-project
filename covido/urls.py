@@ -26,8 +26,8 @@ urlpatterns = [
     #GET  from governorates_create
     path('governorates_create/', views.governorates_create),
 
-    # #GET from cities_create
-    # path('cities_create/', views.cities_create),
+    # #GET from city_create
+    path('city_create/', views.city_create),
 
     #GET POST from profile_Post
     path('profile_create/', views.profile_create),
