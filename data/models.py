@@ -23,7 +23,12 @@ class city(models.Model):
     city_name_en=models.CharField(max_length=200,blank=True, null=True)
 
 class Specialization(models.Model):
-    Specialization_name=models.CharField(max_length=200, blank=True, null=True)
+    name=(
+        ('Chest doctor','Chest doctor'),
+        ('Internist','Internist'),
+        ('Anesthetist','Anesthetist')
+    )
+    Specialization_name=models.CharField (max_length=50, blank=True,null=True,choices=name )
 
 class Profile(models.Model):
  
