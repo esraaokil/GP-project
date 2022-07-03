@@ -27,7 +27,8 @@ urlpatterns = [
     path('governorates_get/', views.governorates_get),
 
     # #GET from city_get
-    path('city_get/', views.city_get),
+    #path('city_get/', views.city_get),
+    path('get_city/', views.get_city.as_view()),
 
     #GET from Specialization_get
     path('Specialization_get/', views.Specialization_get),

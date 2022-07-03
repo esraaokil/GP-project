@@ -1,9 +1,13 @@
 from django.shortcuts import render
+
 from .models import Profile,Doctor,Patient,Review,ChestDetails,Chronic_diseases,Patient_chronic_diseases,governorates,city,Specialization
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializer import  ProfileSerializer,DoctorSerializer,PatientSerializer,ChestDetailsSerializer,ReviewSerializer,Chronic_diseasesSerializer,Patient_chronic_diseasesSerializer,governoratesSerializer,citySerializer,SpecializationSerializer
 from rest_framework import status, filters
+from rest_framework.filters import SearchFilter 
+from rest_framework import generics
+from django_filters.rest_framework import DjangoFilterBackend
 # Create your views here.
 
 #state
@@ -16,13 +20,23 @@ def governorates_get(request):
         return Response(serializer.data)
 
 #city
-@api_view(['GET'])
-def city_get(request):
-    # GET
-    if request.method == 'GET':
-        profile = city.objects.all()
-        serializer = citySerializer(profile, many=True)
-        return Response(serializer.data)
+# @api_view(['GET'])
+# def city_get(request):
+
+#         cities = city.objects.filter(
+#             governorate_id=request.data['governorate_id']
+
+#         )
+#         serializer = citySerializer(cities, many=True)
+#         return Response(serializer.data)
+
+class get_city(generics.ListAPIView):
+    queryset  = city.objects.all()
+    serializer_class = citySerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['governorate_id']
+
+
 
 @api_view(['GET'])
 def Specialization_get(request):
