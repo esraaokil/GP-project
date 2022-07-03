@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from data.models import Profile,Doctor,Patient,Review,ChestDetails,Chronic_diseases,Patient_chronic_diseases,governorates,city
+from data.models import Profile,Doctor,Patient,Review,ChestDetails,Chronic_diseases,Patient_chronic_diseases,governorates,city,Specialization
 
 
 class governoratesSerializer(serializers.ModelSerializer):
@@ -11,6 +11,12 @@ class citySerializer(serializers.ModelSerializer):
     class Meta:
         model=city
         fields= '__all__'
+
+class SpecializationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Specialization
+        fields= ['Specialization_name','Specialization_id']
+
 
 class ProfileSerializer(serializers.ModelSerializer):
     profile_image= serializers.ImageField(required=False)

@@ -1,14 +1,14 @@
 from django.shortcuts import render
-from .models import Profile,Doctor,Patient,Review,ChestDetails,Chronic_diseases,Patient_chronic_diseases,governorates,city
+from .models import Profile,Doctor,Patient,Review,ChestDetails,Chronic_diseases,Patient_chronic_diseases,governorates,city,Specialization
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializer import  ProfileSerializer,DoctorSerializer,PatientSerializer,ChestDetailsSerializer,ReviewSerializer,Chronic_diseasesSerializer,Patient_chronic_diseasesSerializer,governoratesSerializer,citySerializer
+from .serializer import  ProfileSerializer,DoctorSerializer,PatientSerializer,ChestDetailsSerializer,ReviewSerializer,Chronic_diseasesSerializer,Patient_chronic_diseasesSerializer,governoratesSerializer,citySerializer,SpecializationSerializer
 from rest_framework import status, filters
 # Create your views here.
 
 #state
 @api_view(['GET'])
-def governorates_create(request):
+def governorates_get(request):
     # GET
     if request.method == 'GET':
         profile = governorates.objects.all()
@@ -17,11 +17,19 @@ def governorates_create(request):
 
 #city
 @api_view(['GET'])
-def city_create(request):
+def city_get(request):
     # GET
     if request.method == 'GET':
         profile = city.objects.all()
         serializer = citySerializer(profile, many=True)
+        return Response(serializer.data)
+
+@api_view(['GET'])
+def Specialization_get(request):
+    # GET
+    if request.method == 'GET':
+        profile = Specialization.objects.all()
+        serializer = SpecializationSerializer(profile, many=True)
         return Response(serializer.data)
 
 

@@ -22,35 +22,11 @@ class city(models.Model):
     city_name_ar=models.CharField(max_length=200,blank=True, null=True)
     city_name_en=models.CharField(max_length=200,blank=True, null=True)
 
+class Specialization(models.Model):
+    Specialization_name=models.CharField(max_length=200, blank=True, null=True)
 
 class Profile(models.Model):
-    # EGYPT_CITIES = (
-    #     ('Cairo', 'Cairo'),
-    #     ('Alexandria', 'Alexandria'),
-    #     ('Giza', 'Giza'),
-    #     ('Shubra', 'Shubra El Kheima'),
-    #     ('Port_Said', 'Port Said'),
-    #     ('Suez', 'Suez'),
-    #     ('Mahalla', 'Mahalla (Gharbia)'),
-    #     ('Luxor', 'Luxor'),
-    #     ('Mansoura', 'Mansoura (Dakahlia)'),
-    #     ('Tanta', 'Tanta (Gharbia)'),
-    #     ('Asyut', 'Asyut'),
-    #     ('Ismailia', 'Ismailia'),
-    #     ('Faiyum', 'Faiyum'),
-    #     ('Zagazig', 'Zagazig (Sharqia)'),
-    #     ('Damietta', 'Damietta'),
-    #     ('Aswan', 'Aswan'),
-    #     ('Minya', 'Minya'),
-    #     ('Damanhur', 'Damanhur (Beheira)'),
-    #     ('Beni_Suef', 'Beni Suef'),
-    #     ('Hurghada', 'Hurghada (Red Sea)'),
-    #     ('Qena', 'Qena'),
-    #     ('Sohag', 'Sohag'),
-    #     ('Shibin', 'Shibin El Kom (Monufia)'),
-    #     ('Banha', 'Banha (Qalyubia)'),
-    #     ('Arish', 'Arish (North Sinai)'),
-    # )
+ 
     type_choices= (
         ('doctor','doctor'),
         ('patient','patient')
@@ -66,7 +42,7 @@ class Profile(models.Model):
     password = models.CharField(max_length=200, blank=True,null=True)
     gander= models.CharField(max_length=50, blank=True,null=True, choices=six)
     #city = models.CharField(max_length=200, blank=True, null=True, choices=EGYPT_CITIES)
-    #city_id=models.ForeignKey(citiess,on_delete=models.CASCADE, null=True)
+    city_id=models.ForeignKey(city,on_delete=models.CASCADE, null=True,)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
     phone_number = models.CharField(validators=[phone_regex], max_length=17,  blank=True,null=True, unique=True) # Validators should be a list
     #created = models.DateTimeField(default=datetime(2017, 7, 28, 7, 58, 21))
@@ -83,6 +59,7 @@ class Doctor(Profile):
     national_id=models.CharField(max_length=200,blank=True, null=True)
     identification=models.ImageField(upload_to=upload_to, blank=True, null=True)
     social_website = models.CharField(max_length=200, blank=True, null=True)
+    Specialization_id=models.ForeignKey(Specialization,on_delete=models.SET_NULL, null=True, blank=True, related_name='Specialization')
     doctor_id = models.UUIDField(default=uuid.uuid4, unique=True,
                           primary_key=True, editable=True)
     #profile_id=models.ForeignKey(Profile, related_name='doctor_profile', on_delete=models.CASCADE)
@@ -168,4 +145,3 @@ class Patient_chronic_diseases(models.Model):
     chronic_diseases_id=models.ForeignKey(Chronic_diseases,related_name='diseases', on_delete=models.CASCADE,null=True, blank=True) 
     patient_id=models.ForeignKey(Patient,related_name='diseases', on_delete=models.CASCADE,null=True, blank=True) 
 
- 
