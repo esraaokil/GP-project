@@ -37,14 +37,14 @@ class DoctorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model=Doctor
-        #fields=['type_name','name','email','password','gander','phone_number','profile_image','short_intro','bio','national_id','identification','social_website','doctor_patient_set','review','doctor_id']
-        fields= '__all__'
+        fields=['type_name','name','email','password','gander','phone_number','profile_image','short_intro','bio','national_id','identification','social_website','doctor_patient_set','review','doctor_id']
+        #fields= '__all__'
 
 class PatientSerializer(serializers.ModelSerializer):
     class Meta:
         model=Patient
-        fields= '__all__'
-        #fields=['type_name','name','email','password','gander','phone_number','profile_image','patient_x_ray','patientDoctor','patient_id','diseases','Pregnant']
+        #fields= '__all__'
+        fields=['type_name','name','email','password','gander','phone_number','profile_image','patient_x_ray','patientDoctor','patient_id','diseases','Pregnant']
 
 class ChestDetailsSerializer(serializers.ModelSerializer):
     x_ray_image= serializers.ImageField(required=False)
